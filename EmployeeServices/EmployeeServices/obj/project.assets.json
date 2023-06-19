@@ -10959,19 +10959,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\david\\.nuget\\packages\\": {}
+    "C:\\Users\\davidliu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\david\\Desktop\\ispan_WebAPI\\EmployeeServices\\EmployeeServices\\EmployeeServices.csproj",
+      "projectUniqueName": "C:\\Users\\davidliu\\Desktop\\ispan_WebAPI\\EmployeeServices\\EmployeeServices\\EmployeeServices.csproj",
       "projectName": "EmployeeServices",
-      "projectPath": "C:\\Users\\david\\Desktop\\ispan_WebAPI\\EmployeeServices\\EmployeeServices\\EmployeeServices.csproj",
-      "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\david\\Desktop\\ispan_WebAPI\\EmployeeServices\\EmployeeServices\\obj\\",
+      "projectPath": "C:\\Users\\davidliu\\Desktop\\ispan_WebAPI\\EmployeeServices\\EmployeeServices\\EmployeeServices.csproj",
+      "packagesPath": "C:\\Users\\davidliu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\davidliu\\Desktop\\ispan_WebAPI\\EmployeeServices\\EmployeeServices\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\davidliu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10979,6 +10979,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11035,7 +11036,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

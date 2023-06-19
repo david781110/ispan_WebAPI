@@ -26,8 +26,8 @@ namespace EmployeeServices.Controllers
         [HttpGet]
         public async Task<IEnumerable<EmployeeDTO>> GetEmployees()
         {
-          
-            return  _context.Employees.Select(emp=>new EmployeeDTO
+
+            return _context.Employees.Select(emp => new EmployeeDTO
             {
                 EmployeeID = emp.EmployeeId,
                 FirstName = emp.FirstName,
@@ -38,33 +38,44 @@ namespace EmployeeServices.Controllers
 
         // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employees>> GetEmployees(int id)
+        public async Task<ActionResult<EmployeeDTO>> GetEmployees(int id)
         {
-          if (_context.Employees == null)
-          {
-              return NotFound();
-          }
-            var employees = await _context.Employees.FindAsync(id);
-
-            if (employees == null)
+            if (_context.Employees == null)
             {
                 return NotFound();
             }
+            var employees = await _context.Employees.FindAsync(id);
 
-            return employees;
+
+
+            if (employees == null)
+            {
+                return Content("沒有這筆資料");
+            }
+
+            return new EmployeeDTO
+            {
+                EmployeeID = employees.EmployeeId,
+                FirstName = employees.FirstName,
+                LastName = employees.LastName,
+                Title = employees.Title
+            };
         }
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployees(int id, Employees employees)
+        public async Task<IActionResult> PutEmployees(int id, EmployeeDTO employees)
         {
-            if (id != employees.EmployeeId)
+            if (id != employees.EmployeeID)
             {
                 return BadRequest();
             }
-
-            _context.Entry(employees).State = EntityState.Modified;
+            Employees emp = await _context.Employees.FindAsync(id);
+            emp.FirstName = employees.FirstName;
+            emp.LastName = employees.LastName;
+            emp.Title = employees.Title;
+            _context.Entry(emp).State = EntityState.Modified;
 
             try
             {
@@ -82,22 +93,28 @@ namespace EmployeeServices.Controllers
                 }
             }
 
-            return NoContent();
+            return Content("修改成功!");
         }
 
         // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Employees>> PostEmployees(Employees employees)
+        public async Task<ActionResult<Employees>> PostEmployees(EmployeeDTO employees)
         {
-          if (_context.Employees == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Employees'  is null.");
-          }
-            _context.Employees.Add(employees);
+            if (_context.Employees == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Employees'  is null.");
+            }
+            Employees emp = new Employees
+            {
+                FirstName = employees.FirstName,
+                LastName = employees.LastName,
+                Title = employees.Title
+            };
+            _context.Employees.Add(emp);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployees", new { id = employees.EmployeeId }, employees);
+            return Content("新增紀錄成功!");
         }
 
         // DELETE: api/Employees/5
@@ -113,11 +130,19 @@ namespace EmployeeServices.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Employees.Remove(employees);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return Content("刪除失敗");
 
-            _context.Employees.Remove(employees);
-            await _context.SaveChangesAsync();
+            }
 
-            return NoContent();
+
+            return Content("刪除成功!");
         }
 
         private bool EmployeesExists(int id)
