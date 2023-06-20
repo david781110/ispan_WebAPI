@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using EmployeeServices.Models;
 using System.Reflection;
 using EmployeeServices.DTO;
+using Microsoft.AspNetCore.Cors;
 
 namespace EmployeeServices.Controllers
 {
+    //這裡的每一個Action都會吃到CORS的設定
+    [EnableCors("MyAllow")]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
@@ -23,6 +26,8 @@ namespace EmployeeServices.Controllers
         }
 
         // GET: api/Employees
+        //寫在這裡的話只有這個Action會吃到CORS的設定
+        //[EnableCors("MyAllow")]
         [HttpGet]
         public async Task<IEnumerable<EmployeeDTO>> GetEmployees()
         {
